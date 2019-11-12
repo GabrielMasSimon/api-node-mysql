@@ -16,6 +16,17 @@ router.get('/tatuajes', (req, res) => {
     });
 });
 
+//Obtener un tatuaje por id
+router.get('/tatuaje/:id', (req, res) => {
+    database.query('SELECT * FROM tatuaje WHERE id =?', [req.params.id], (err, rows, fields) => {
+        if (!err)
+            res.send(rows);
+        else
+            console.log(err);
+    })
+});
+
+
 //Obtener todos los tatuadores
 router.get('/tatuadores', (req, res) => {
     database.query('SELECT * FROM tatuador', (err, rows, fields) => {
