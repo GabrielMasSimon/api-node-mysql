@@ -6,6 +6,7 @@ router.get('/', (req,res) => {
             res.send('Welcome to Tattoo page');
 });
 
+//Obtener todos los tatuajes
 router.get('/tatuajes', (req, res) => {
     database.query('SELECT * FROM tatuaje', (err, rows, fields) => {
         if (!err)
@@ -15,6 +16,7 @@ router.get('/tatuajes', (req, res) => {
     });
 });
 
+//Obtener todos los tatuadores
 router.get('/tatuadores', (req, res) => {
     database.query('SELECT * FROM tatuador', (err, rows, fields) => {
         if (!err)
@@ -24,6 +26,8 @@ router.get('/tatuadores', (req, res) => {
     });
 });
 
+
+//Obtener todos los estudios
 router.get('/estudios', (req, res) => {
     database.query('SELECT * FROM estudio', (err, rows, fields) => {
         if (!err)
