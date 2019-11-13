@@ -38,24 +38,32 @@ router.delete('/tatuaje/:id', (req, res) => {
 
 //Insert an employees
 router.post('/nuevoTatuaje', (req, res) => {
-    console.log(req.body);
-    res.send('OK');
-});
 
-//Insert an employees
-router.post('/nuevo-tatuaje-2', (req, res) => {
-    let tattoo = req.body;
-    var sql = "SET @id = ?;SET @img = ?;SET @descripcion = ?;SET @tatuador = ?; SET @color = ?; \
-    CALL EmployeeAddOrEdit(@id,@img,@descripcion,@tatuador,@color);";
-    database.query(sql, [tattoo.id, tattoo.img, tattoo.descripcion, tattoo.tatuador, tattoo.color], (err, rows, fields) => {
+    let body = req.body;
+
+    if (body.img == undefined)
+        body.img = null;
+
+    if (body.descripcion == undefined)
+        body.descripcion = null
+
+    if (body.tatuador == undefined)
+        body.tatuador = null
+
+    if (body.color == undefined)
+        body.color = null;
+
+    let query = `INSERT INTO tatuaje (img, descripcion, tatuador, color) VALUES(?,?,?,?)`;
+    let values = [body.img, body.descripcion, body.tatuador, body.color];
+
+    database.query(query, values, (err, rows, fields) => {
         if (!err)
-            rows.forEach(element => {
-                if(element.constructor == Array)
-                    res.send('Inserted tattoo id : '+element[0].id);
-            });
-        else
-            console.log(err);
-    })
+            res.send('Nuevo tatuaje creado con exito')
+        else{
+            console.log(err)
+            res.send("Error al crear el nuevo tatuaje")
+        }
+    });
 });
 
 //Obtener todos los tatuadores
