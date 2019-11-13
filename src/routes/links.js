@@ -26,6 +26,15 @@ router.get('/tatuaje/:id', (req, res) => {
     })
 });
 
+//Eliminar un tatuaje por id
+router.delete('/tatuaje/:id', (req, res) => {
+    database.query('DELETE FROM tatuaje WHERE id = ?',[req.params.id], (err, rows, fields) => {
+        if (!err)
+            res.send('Deleted succesfully.');
+        else
+            console.log(err);
+    })
+});
 
 //Obtener todos los tatuadores
 router.get('/tatuadores', (req, res) => {
