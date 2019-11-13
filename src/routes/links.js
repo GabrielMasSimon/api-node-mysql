@@ -11,8 +11,11 @@ router.get('/tatuajes', (req, res) => {
     database.query('SELECT * FROM tatuaje', (err, rows, fields) => {
         if (!err)
             res.send(rows);
-        else
+        else{
+            console.log(err)
             res.send(err);
+        }
+
     });
 });
 
@@ -21,8 +24,11 @@ router.get('/tatuaje/:id', (req, res) => {
     database.query('SELECT * FROM tatuaje WHERE id =?', [req.params.id], (err, rows, fields) => {
         if (!err)
             res.send(rows);
-        else
+        else{
             console.log(err);
+            res.send(err);
+        }
+
     })
 });
 
@@ -31,8 +37,11 @@ router.delete('/tatuaje/:id', (req, res) => {
     database.query('DELETE FROM tatuaje WHERE id = ?',[req.params.id], (err, rows, fields) => {
         if (!err)
             res.send('Deleted succesfully.');
-        else
+        else{
             console.log(err);
+            res.send('Error al eliminar el tatuaje ' + [req.params.id] );
+        }
+
     })
 });
 
