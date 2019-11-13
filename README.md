@@ -33,3 +33,5 @@ id INT(11),
 name VARCHAR(45),
 address VARCHAR(100)
 ```
+
+En src/database/database.md se encuentra el script para poder crear la base de datos
