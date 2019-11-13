@@ -120,7 +120,7 @@ router.get('/tattooArtists', (req, res) => {
 
 //Obtener todos los estudios
 router.get('/estudios', (req, res) => {
-    database.query('SELECT * FROM estudio', (err, rows, fields) => {
+    database.query('SELECT * FROM tattooStudio', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
