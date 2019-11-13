@@ -45,7 +45,7 @@ router.delete('/tatuaje/:id', (req, res) => {
     })
 });
 
-//Insert an employees
+//Insert a tattoo
 router.post('/nuevoTatuaje', (req, res) => {
 
     let tatuaje = req.body;
@@ -71,6 +71,38 @@ router.post('/nuevoTatuaje', (req, res) => {
         else{
             console.log(err)
             res.send("Error al crear el nuevo tatuaje")
+        }
+    });
+});
+
+//Update tattoo
+router.put('/tatuaje', (req, res) => {
+    let tatuaje = req.body;
+
+    if (tatuaje.img == undefined)
+        tatuaje.img = null;
+
+    if (tatuaje.descripcion == undefined)
+        tatuaje.descripcion = null
+
+    if (tatuaje.tatuador == undefined)
+        tatuaje.tatuador = null
+
+    if (tatuaje.color == undefined)
+        tatuaje.color = null;
+
+    let query = `UPDATE tatuaje set img=?, descripcion=?, tatuador=?, color=? WHERE id=?`;
+    let values = [tatuaje.img, tatuaje.descripcion, tatuaje.tatuador, tatuaje.color, tatuaje.id];
+
+    database.query(query, values, (err, rows, fields) => {
+        if (!err){
+            res.send('Tatuaje actualizado con exito');
+            // Si queremos devolver el objeto actualizado
+            // res.send(tatuaje);
+        }
+        else{
+            console.log(err)
+            res.send("Error al editar el tatuaje");
         }
     });
 });
