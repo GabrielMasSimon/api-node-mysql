@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database/database');
 
-router.get('/', (req,res) => {
-            res.send('Welcome to Tattoo page');
+router.get('/', (req, res) => {
+    res.send('Welcome to Tattoo page');
 });
 
 //Obtener todos los estudios

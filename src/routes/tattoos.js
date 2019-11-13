@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database/database');
 
-router.get('/', (req,res) => {
-            res.send('Welcome to Tattoo page');
+router.get('/', (req, res) => {
+    res.send('Welcome to Tattoo page');
 });
 
 //Get all tattoos
@@ -11,7 +11,7 @@ router.get('/tattoos', (req, res) => {
     database.query('SELECT * FROM tattoo', (err, rows, fields) => {
         if (!err)
             res.send(rows);
-        else{
+        else {
             console.log(err)
             res.send(err);
         }
@@ -24,7 +24,7 @@ router.get('/tattoo/:id', (req, res) => {
     database.query('SELECT * FROM tattoo WHERE id =?', [req.params.id], (err, rows, fields) => {
         if (!err)
             res.send(rows);
-        else{
+        else {
             console.log(err);
             res.send(err);
         }
@@ -34,12 +34,12 @@ router.get('/tattoo/:id', (req, res) => {
 
 //Delete tattoo by id
 router.delete('/tattoo/:id', (req, res) => {
-    database.query('DELETE FROM tattoo WHERE id = ?',[req.params.id], (err, rows, fields) => {
+    database.query('DELETE FROM tattoo WHERE id = ?', [req.params.id], (err, rows, fields) => {
         if (!err)
             res.send('Deleted succesfully');
-        else{
+        else {
             console.log(err);
-            res.send('Error deleting tattoo ' + [req.params.id] );
+            res.send('Error deleting tattoo ' + [req.params.id]);
         }
 
     })
@@ -68,7 +68,7 @@ router.post('/tattoo', (req, res) => {
     database.query(query, values, (err, rows, fields) => {
         if (!err)
             res.send('Tattoo created successfully');
-        else{
+        else {
             console.log(err);
             res.send("Error creating tattoo");
         }
@@ -95,12 +95,12 @@ router.put('/tattoo', (req, res) => {
     let values = [tattoo.img, tattoo.description, tattoo.tattooArtist, tattoo.color, tattoo.id];
 
     database.query(query, values, (err, rows, fields) => {
-        if (!err){
+        if (!err) {
             res.send('Tattoo updated successfully');
             // If we want to return the updated object
             // res.send(tattoo);
         }
-        else{
+        else {
             console.log(err)
             res.send("Error updating tattoo");
         }
