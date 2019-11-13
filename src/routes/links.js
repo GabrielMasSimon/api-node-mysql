@@ -48,22 +48,22 @@ router.delete('/tatuaje/:id', (req, res) => {
 //Insert an employees
 router.post('/nuevoTatuaje', (req, res) => {
 
-    let body = req.body;
+    let tatuaje = req.body;
 
-    if (body.img == undefined)
-        body.img = null;
+    if (tatuaje.img == undefined)
+        tatuaje.img = null;
 
-    if (body.descripcion == undefined)
-        body.descripcion = null
+    if (tatuaje.descripcion == undefined)
+        tatuaje.descripcion = null
 
-    if (body.tatuador == undefined)
-        body.tatuador = null
+    if (tatuaje.tatuador == undefined)
+        tatuaje.tatuador = null
 
-    if (body.color == undefined)
-        body.color = null;
+    if (tatuaje.color == undefined)
+        tatuaje.color = null;
 
     let query = `INSERT INTO tatuaje (img, descripcion, tatuador, color) VALUES(?,?,?,?)`;
-    let values = [body.img, body.descripcion, body.tatuador, body.color];
+    let values = [tatuaje.img, tatuaje.descripcion, tatuaje.tatuador, tatuaje.color];
 
     database.query(query, values, (err, rows, fields) => {
         if (!err)
