@@ -6,9 +6,9 @@ router.get('/', (req,res) => {
             res.send('Welcome to Tattoo page');
 });
 
-//Obtener todos los tatuajes
-router.get('/tatuajes', (req, res) => {
-    database.query('SELECT * FROM tatuaje', (err, rows, fields) => {
+//Get all tattoos
+router.get('/tattoos', (req, res) => {
+    database.query('SELECT * FROM tattoo', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else{
@@ -19,9 +19,9 @@ router.get('/tatuajes', (req, res) => {
     });
 });
 
-//Obtener un tatuaje por id
-router.get('/tatuaje/:id', (req, res) => {
-    database.query('SELECT * FROM tatuaje WHERE id =?', [req.params.id], (err, rows, fields) => {
+//Get tattoo by id
+router.get('/tattoo/:id', (req, res) => {
+    database.query('SELECT * FROM tattoo WHERE id =?', [req.params.id], (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else{
@@ -32,84 +32,84 @@ router.get('/tatuaje/:id', (req, res) => {
     })
 });
 
-//Eliminar un tatuaje por id
-router.delete('/tatuaje/:id', (req, res) => {
-    database.query('DELETE FROM tatuaje WHERE id = ?',[req.params.id], (err, rows, fields) => {
+//Delete tattoo by id
+router.delete('/tattoo/:id', (req, res) => {
+    database.query('DELETE FROM tattoo WHERE id = ?',[req.params.id], (err, rows, fields) => {
         if (!err)
-            res.send('Deleted succesfully.');
+            res.send('Deleted succesfully');
         else{
             console.log(err);
-            res.send('Error al eliminar el tatuaje ' + [req.params.id] );
+            res.send('Error deleting tattoo ' + [req.params.id] );
         }
 
     })
 });
 
-//Insert a tattoo
-router.post('/nuevoTatuaje', (req, res) => {
+//Insert tattoo
+router.post('/tattoo', (req, res) => {
 
-    let tatuaje = req.body;
+    let tattoo = req.body;
 
-    if (tatuaje.img == undefined)
-        tatuaje.img = null;
+    if (tattoo.img == undefined)
+        tattoo.img = null;
 
-    if (tatuaje.descripcion == undefined)
-        tatuaje.descripcion = null
+    if (tattoo.description == undefined)
+        tattoo.description = null
 
-    if (tatuaje.tatuador == undefined)
-        tatuaje.tatuador = null
+    if (tattoo.tattooArtist == undefined)
+        tattoo.tattooArtist = null
 
-    if (tatuaje.color == undefined)
-        tatuaje.color = null;
+    if (tattoo.color == undefined)
+        tattoo.color = null;
 
-    let query = `INSERT INTO tatuaje (img, descripcion, tatuador, color) VALUES(?,?,?,?)`;
-    let values = [tatuaje.img, tatuaje.descripcion, tatuaje.tatuador, tatuaje.color];
+    let query = `INSERT INTO tattoo (img, description, tattooArtist, color) VALUES(?,?,?,?)`;
+    let values = [tattoo.img, tattoo.description, tattoo.tattooArtist, tattoo.color];
 
     database.query(query, values, (err, rows, fields) => {
         if (!err)
-            res.send('Nuevo tatuaje creado con exito')
+            res.send('Tattoo created successfully');
         else{
-            console.log(err)
-            res.send("Error al crear el nuevo tatuaje")
+            console.log(err);
+            res.send("Error creating tattoo");
         }
     });
 });
 
 //Update tattoo
-router.put('/tatuaje', (req, res) => {
-    let tatuaje = req.body;
+router.put('/tattoo', (req, res) => {
+    let tattoo = req.body;
 
-    if (tatuaje.img == undefined)
-        tatuaje.img = null;
+    if (tattoo.img == undefined)
+        tattoo.img = null;
 
-    if (tatuaje.descripcion == undefined)
-        tatuaje.descripcion = null
+    if (tattoo.description == undefined)
+        tattoo.description = null
 
-    if (tatuaje.tatuador == undefined)
-        tatuaje.tatuador = null
+    if (tattoo.tattooArtist == undefined)
+        tattoo.tattooArtist = null
 
-    if (tatuaje.color == undefined)
-        tatuaje.color = null;
+    if (tattoo.color == undefined)
+        tattoo.color = null;
 
-    let query = `UPDATE tatuaje set img=?, descripcion=?, tatuador=?, color=? WHERE id=?`;
-    let values = [tatuaje.img, tatuaje.descripcion, tatuaje.tatuador, tatuaje.color, tatuaje.id];
+    let query = `UPDATE tattoo set img=?, description=?, tattooArtist=?, color=? WHERE id=?`;
+    let values = [tattoo.img, tattoo.description, tattoo.tattooArtist, tattoo.color, tattoo.id];
 
     database.query(query, values, (err, rows, fields) => {
         if (!err){
-            res.send('Tatuaje actualizado con exito');
-            // Si queremos devolver el objeto actualizado
-            // res.send(tatuaje);
+            res.send('Tattoo updated successfully');
+            // If we want to return the updated object
+            // res.send(tattoo);
         }
         else{
             console.log(err)
-            res.send("Error al editar el tatuaje");
+            res.send("Error updating tattoo");
         }
     });
 });
 
-//Obtener todos los tatuadores
-router.get('/tatuadores', (req, res) => {
-    database.query('SELECT * FROM tatuador', (err, rows, fields) => {
+//Obtener todos los tattooArtists
+router.get('/tattooArtists', (req, res) => {
+    database.query('SELECT * FROM tattooArtist', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
