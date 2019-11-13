@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 // TODO mirar si el require es correcto o se tiene que hacer de otra forma
 const database = require('./database');
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(require('./routes/links'));
 
