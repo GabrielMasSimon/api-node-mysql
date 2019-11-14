@@ -7,13 +7,98 @@ router.get('/', (req, res) => {
 });
 
 
-//Obtener todos los tattooArtists
+//Get all tattooArtists
 router.get('/tattooArtists', (req, res) => {
     database.query('SELECT * FROM tattooArtist', (err, rows, fields) => {
         if (!err)
             res.send(rows);
-        else
+        else{
             res.send(err);
+            console.log(err)
+        }
+
+    });
+});
+
+//Get tattooArtists by id
+router.get('/tattooArtist/:id', (req, res) => {
+    database.query('SELECT * FROM tattooArtist WHERE id =?', [req.params.id], (err, rows, fields) => {
+        if (!err)
+            res.send(rows);
+        else {
+            console.log(err);
+            res.send('Error to find a tattooArtist artists' );
+        }
+
+    })
+});
+
+//Delete tattooArtist by id
+router.delete('/tattooArtist/:id', (req, res) => {
+    database.query('DELETE FROM tattooArtist WHERE id = ?', [req.params.id], (err, rows, fields) => {
+        if (!err)
+            res.send('Deleted succesfully');
+        else {
+            console.log(err);
+            res.send('Error deleting tattooArtist');
+        }
+    })
+});
+
+//Insert tattooArtist
+router.post('/tattooArtist', (req, res) => {
+
+    let tattooArtist = req.body;
+
+    if (tattooArtist.name == undefined)
+        tattooArtist.name = null;
+
+    if (tattooArtist.experience == undefined)
+        tattooArtist.experience = null
+
+    if (tattooArtist.tattooStudio == undefined)
+        tattooArtist.tattooStudio = null
+
+    let query = `INSERT INTO tattooArtist (name, experience, tattooStudio) VALUES(?,?,?)`;
+    let values = [tattooArtist.name, tattooArtist.experience, tattooArtist.tattooStudio];
+
+    database.query(query, values, (err, rows, fields) => {
+        if (!err)
+            res.send('TattooArtist created successfully');
+        else {
+            console.log(err);
+            res.send("Error creating tattooArtist");
+        }
+    });
+});
+
+//Update tattooArtist
+router.put('/tattooArtist', (req, res) => {
+    let tattooArtist = req.body;
+
+    if (tattooArtist.name == undefined)
+        tattooArtist.name = null;
+
+    if (tattooArtist.experience == undefined)
+        tattooArtist.experience = null
+
+    if (tattooArtist.tattooStudio == undefined)
+        tattooArtist.tattooStudio = null
+
+
+    let query = `UPDATE tattooArtist set name=?, experience=?, tattooStudio=? WHERE id=?`;
+    let values = [tattooArtist.name, tattooArtist.experience, tattooArtist.tattooStudio, tattooArtist.id];
+
+    database.query(query, values, (err, rows, fields) => {
+        if (!err) {
+            res.send('Tattoo Artist updated successfully');
+            // If we want to return the updated object
+            // res.send(tattooArtist);
+        }
+        else {
+            console.log(err)
+            res.send("Error updating tattooArtist");
+        }
     });
 });
 
