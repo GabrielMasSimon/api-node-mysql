@@ -25,7 +25,7 @@ router.get('/tattooArtist/:id', (req, res) => {
             res.send(rows);
         else {
             console.log(err);
-            res.send('Error to find a tattoo artist artists');
+            res.send('Error to find a tattoo artists');
         }
     });
 
@@ -39,7 +39,7 @@ router.delete('/tattooArtist/:id', (req, res) => {
             res.send('Deleted succesfully');
         else {
             console.log(err);
-            res.send('Error deleting tattooArtist');
+            res.send('Error deleting tattoo artist');
         }
     });
 
@@ -54,10 +54,10 @@ router.post('/tattooArtist', (req, res) => {
 
     database.query(query, values, (err, rows, fields) => {
         if (!err)
-            res.send('TattooArtist created successfully');
+            res.send('Tattoo artist created successfully');
         else {
             console.log(err);
-            res.send("Error creating tattooArtist");
+            res.send("Error creating tattoo artist");
         }
     });
 
@@ -72,13 +72,13 @@ router.put('/tattooArtist', (req, res) => {
 
     database.query(query, values, (err, rows, fields) => {
         if (!err) {
-            res.send('Tattoo Artist updated successfully');
+            res.send('Tattoo artist updated successfully');
             // If we want to return the updated object
             // res.send(tattooArtist);
         }
         else {
             console.log(err)
-            res.send("Error updating tattooArtist");
+            res.send("Error updating tattoo artist");
         }
     });
 
