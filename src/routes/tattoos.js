@@ -49,19 +49,6 @@ router.delete('/tattoo/:id', (req, res) => {
 router.post('/tattoo', (req, res) => {
 
     let tattoo = req.body;
-
-    if (tattoo.img == undefined)
-        tattoo.img = null;
-
-    if (tattoo.description == undefined)
-        tattoo.description = null
-
-    if (tattoo.tattooArtist == undefined)
-        tattoo.tattooArtist = null
-
-    if (tattoo.color == undefined)
-        tattoo.color = null;
-
     let query = `INSERT INTO tattoo (img, description, tattooArtist, color) VALUES(?,?,?,?)`;
     let values = [tattoo.img, tattoo.description, tattoo.tattooArtist, tattoo.color];
 
@@ -77,20 +64,8 @@ router.post('/tattoo', (req, res) => {
 
 //Update tattoo
 router.put('/tattoo', (req, res) => {
+
     let tattoo = req.body;
-
-    if (tattoo.img == undefined)
-        tattoo.img = null;
-
-    if (tattoo.description == undefined)
-        tattoo.description = null
-
-    if (tattoo.tattooArtist == undefined)
-        tattoo.tattooArtist = null
-
-    if (tattoo.color == undefined)
-        tattoo.color = null;
-
     let query = `UPDATE tattoo set img=?, description=?, tattooArtist=?, color=? WHERE id=?`;
     let values = [tattoo.img, tattoo.description, tattoo.tattooArtist, tattoo.color, tattoo.id];
 
