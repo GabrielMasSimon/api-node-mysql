@@ -83,4 +83,60 @@ router.put('/tattoo', (req, res) => {
 
 });
 
+//Get tattoo by tattoArtistId
+router.get('/tattooByArtist/:id', (req, res) => {
+    database.query('SELECT * FROM tattoo WHERE tattooArtist =?', [req.params.id], (err, rows, fields) => {
+        if (!err)
+            res.send(rows);
+        else {
+            console.log(err);
+            res.send('Error to find a tattoo by artist');
+        }
+
+    })
+});
+
+//Get tattoo by tattooStudio
+router.get('/tattooByStudio/:id', (req, res) => {
+    database.query(
+        'SELECT t.* FROM tattoo.tattooStudio ts' +
+        ' inner join tattooArtist ta' +
+        ' on ta.tattooStudio = ts.id' +
+        ' inner join tattoo t' +
+        ' on t.tattooArtist = ta.id' +
+        ' where ts.id=?'
+        , [req.params.id], (err, rows, fields) => {
+        if (!err)
+            res.send(rows);
+        else {
+            console.log(err);
+            res.send('Error to find a tattoo by studio');
+        }
+
+    })
+});
+
+
+//Get tattoo by tattoArtistId
+router.get('/tattooByColor/:color', (req, res) => {
+
+    let boolean;
+    if (req.params.color === 'true')
+        boolean = true;
+    if (req.params.color === 'false')
+        boolean = false;
+
+    database.query('SELECT * FROM tattoo WHERE color = ?', boolean, (err, rows, fields) => {
+        console.log();
+        if (!err)
+            res.send(rows);
+        else {
+            console.log(err);
+            res.send('Error to find a tattoo by color');
+        }
+
+    })
+});
+
+
 module.exports = router;
