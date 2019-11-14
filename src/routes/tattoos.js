@@ -12,7 +12,7 @@ router.get('/tattoos', (req, res) => {
         if (!err)
             res.send(rows);
         else {
-            console.log(err)
+            console.log('Error to find tattoos');
             res.send(err);
         }
 

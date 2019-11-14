@@ -10,8 +10,8 @@ router.get('/tattooArtists', (req, res) => {
         if (!err)
             res.send(rows);
         else {
+            console.log('Error to find tattoo artists');
             res.send(err);
-            console.log(err)
         }
     });
 
@@ -25,7 +25,7 @@ router.get('/tattooArtist/:id', (req, res) => {
             res.send(rows);
         else {
             console.log(err);
-            res.send('Error to find a tattooArtist artists');
+            res.send('Error to find a tattoo artist artists');
         }
     });
 
