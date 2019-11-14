@@ -80,6 +80,7 @@ router.put('/tattoo', (req, res) => {
             res.send("Error updating tattoo");
         }
     });
+
 });
 
 module.exports = router;

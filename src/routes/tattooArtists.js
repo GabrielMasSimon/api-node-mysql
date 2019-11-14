@@ -2,13 +2,10 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database/database');
 
-router.get('/', (req, res) => {
-    res.send('Welcome to Tattoo page');
-});
-
 
 //Get all tattooArtists
 router.get('/tattooArtists', (req, res) => {
+
     database.query('SELECT * FROM tattooArtist', (err, rows, fields) => {
         if (!err)
             res.send(rows);
@@ -17,10 +14,12 @@ router.get('/tattooArtists', (req, res) => {
             console.log(err)
         }
     });
+
 });
 
 //Get tattooArtists by id
 router.get('/tattooArtist/:id', (req, res) => {
+
     database.query('SELECT * FROM tattooArtist WHERE id =?', [req.params.id], (err, rows, fields) => {
         if (!err)
             res.send(rows);
@@ -28,11 +27,13 @@ router.get('/tattooArtist/:id', (req, res) => {
             console.log(err);
             res.send('Error to find a tattooArtist artists');
         }
-    })
+    });
+
 });
 
 //Delete tattooArtist by id
 router.delete('/tattooArtist/:id', (req, res) => {
+
     database.query('DELETE FROM tattooArtist WHERE id = ?', [req.params.id], (err, rows, fields) => {
         if (!err)
             res.send('Deleted succesfully');
@@ -40,7 +41,8 @@ router.delete('/tattooArtist/:id', (req, res) => {
             console.log(err);
             res.send('Error deleting tattooArtist');
         }
-    })
+    });
+
 });
 
 //Insert tattooArtist
@@ -58,6 +60,7 @@ router.post('/tattooArtist', (req, res) => {
             res.send("Error creating tattooArtist");
         }
     });
+
 });
 
 //Update tattooArtist
@@ -78,6 +81,7 @@ router.put('/tattooArtist', (req, res) => {
             res.send("Error updating tattooArtist");
         }
     });
+
 });
 
 module.exports = router;
