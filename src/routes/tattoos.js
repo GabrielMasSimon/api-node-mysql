@@ -26,7 +26,7 @@ router.get('/tattoo/:id', (req, res) => {
             res.send(rows);
         else {
             console.log(err);
-            res.send(err);
+            res.send('Error to find a tattoo');
         }
 
     })
@@ -39,7 +39,7 @@ router.delete('/tattoo/:id', (req, res) => {
             res.send('Deleted succesfully');
         else {
             console.log(err);
-            res.send('Error deleting tattoo ' + [req.params.id]);
+            res.send('Error deleting tattoo');
         }
 
     })
