@@ -31,3 +31,6 @@ CREATE TABLE `tattoo` (
   KEY `tatuajeTatuador_fk_idx` (`tattooArtist`),
   CONSTRAINT `tatuajeTatuador_fk` FOREIGN KEY (`tattooArtist`) REFERENCES `tattooArtist` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+ALTER TABLE `tattoo`.`tattoo`
+CHANGE COLUMN `color` `color` TINYINT NULL DEFAULT NULL ;
