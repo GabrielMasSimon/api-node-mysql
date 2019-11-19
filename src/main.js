@@ -7,9 +7,9 @@ const colors = require('colors');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(require('./routes/tattoos'));
-app.use(require('./routes/tattooArtists'));
-app.use(require('./routes/tattooStudio'));
+app.use(require('./controllers/tattoos'));
+app.use(require('./controllers/tattooArtists'));
+app.use(require('./controllers/tattooStudio'));
 
 
 app.listen(3000, () => {
