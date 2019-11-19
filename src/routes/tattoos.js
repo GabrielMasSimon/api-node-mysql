@@ -127,7 +127,6 @@ router.get('/tattooByColor/:color', (req, res) => {
         boolean = false;
 
     database.query('SELECT * FROM tattoo WHERE color = ?', boolean, (err, rows, fields) => {
-        console.log();
         if (!err)
             res.send(rows);
         else {
