@@ -7,13 +7,20 @@ const colors = require('colors');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+//Settings
+app.set('appName', "api-node-mysql");
+app.set('port', 3000)
+
+//Routes
 app.use(require('./controllers/tattoos'));
 app.use(require('./controllers/tattooArtists'));
 app.use(require('./controllers/tattooStudio'));
 
 
-app.listen(3000, () => {
-    console.log(' \n Server listen on port 3000 \n'.green);
+app.listen(app.get('port'), () => {
+    console.log('App name: ',app.get('appName').yellow);
+    console.log('Server listen on port '+ app.get('port'));
 });
 
 
