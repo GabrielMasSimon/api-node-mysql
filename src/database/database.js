@@ -1,10 +1,7 @@
 const mysql = require('mysql');
-const dbConnection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'tattoo'
-});
+const {database} = require('../keys');
+
+const dbConnection = mysql.createConnection(database);
 
 // TODO mirar que tal ha ido la conexión a base de datos y si hay un error, tratarlo
 function checkDatabaseConection(err) {
