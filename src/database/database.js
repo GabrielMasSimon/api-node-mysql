@@ -3,6 +3,10 @@ const {database} = require('../keys');
 
 const dbConnection = mysql.createConnection(database);
 
+dbConnection.connect((err, connection) => {
+    checkDatabaseConection(err)
+});
+
 // TODO mirar que tal ha ido la conexión a base de datos y si hay un error, tratarlo
 function checkDatabaseConection(err) {
     if (!err)
