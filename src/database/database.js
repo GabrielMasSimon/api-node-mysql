@@ -10,24 +10,24 @@ dbConnection.connect((err, connection) => {
 // TODO mirar que tal ha ido la conexión a base de datos y si hay un error, tratarlo
 function checkDatabaseConection(err) {
     if (!err)
-        console.log('Conectado a la base de datos correctamente');
+        console.log('Database connected'.yellow);
     else {
-        console.error('Database error:')
+        console.error('Database error:'.red)
         switch (err.code) {
             case 'PROTOCOL_CONNECTION_LOST' :
-                console.error('LA CONEXION DE BASE DE DATOS HA SIDO CERRADA');
+                console.error('THE DATABASE CONNECTION HAS BEEN CLOSED'.red);
                 break;
             case 'ER_CON_COUNT_ERROR' :
-                console.error('LA BASE DE DATOS TIENE MUCHAS CONEXIONES');
+                console.error('THE DATABASE HAS MANY CONNECTIONS'.red);
                 break;
             case 'ECONNREFUSED' :
-                console.error('CONEXIÓN A LA BASE DE DATOS RECHAZADA');
+                console.error('CONNECTION REJECTED'.red);
                 break;
             case 'ER_ACCESS_DENIED_ERROR' :
-                console.error('USUARIO O CONTRASEÑA INCORRECTO');
+                console.error('INCORRECT USER OR PASSWORD'.red);
                 break;
             case 'ER_BAD_DB_ERROR' :
-                console.error('BASE DE DATOS NO ENCONTRADA');
+                console.error('DATABASE NOT FOUND'.red);
                 break;
             default:
                 console.error(err);
